@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - SneakerHub</title>
+  <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+  <!-- ==================== PANTALLA DE LOGIN ==================== -->
+  <div class="login-container" id="loginPage">
+    <div class="login-box">
+      <div class="login-header">
+        <h1>👟 SneakerHub</h1>
+        <p>Panel de Administración</p>
+      </div>
+      
+      <div class="error-message" id="loginError">
+        ❌ Usuario o contraseña incorrectos
+      </div>
+      
+      <form class="login-form" id="loginForm">
+        <div class="form-group-login">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" required placeholder="Ingresa tu usuario" autocomplete="username">
+        </div>
+        
+        <div class="form-group-login">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" required placeholder="Ingresa tu contraseña" autocomplete="current-password">
+        </div>
+        
+        <button type="submit" class="btn-login">🔓 Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== PANEL DE ADMINISTRACIÓN ==================== -->
+  <div class="admin-panel" id="adminPanel">
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="header-content">
+        <h1>👟 Panel de Administración</h1>
+        <div class="header-actions">
+          <a href="index.html" class="btn-back">← Volver a la Tienda</a>
+          <button class="btn-logout" id="logoutBtn">🚪 Cerrar Sesión</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-section="agregar">➕ Agregar Producto</button>
+          <button class="nav-item" data-section="gestionar">📦 Gestionar Productos</button>
+          <button class="nav-item" data-section="estadisticas">📊 Estadísticas</button>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Sección: Agregar Producto -->
+        <section id="agregar" class="admin-section active">
+          <h2>Agregar Nuevo Producto</h2>
+          <div class="form-card">
+            <form id="addProductForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="productName">Nombre del Producto *</label>
+                  <input type="text" id="productName" required placeholder="Ej: Nike Air Max 270">
+                </div>
+                <div class="form-group">
+                  <label for="productPrice">Precio (S/) *</label>
+                  <input type="number" id="productPrice" step="0.01" min="0" required placeholder="299.00">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="productCategory">Categoría *</label>
+                <select id="productCategory" required>
+                  <option value="">Selecciona una categoría</option>
+                  <option value="Hombres">Hombres</option>
+                  <option value="Mujeres">Mujeres</option>
+                  <option value="Ninos">Niños</option>
+                  <option value="Ninas">Niñas</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="productDescription">Descripción *</label>
+                <textarea id="productDescription" rows="4" required placeholder="Describe el producto: características, materiales, comodidad, etc."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="productImage">URL de la Imagen</label>
+                <input type="url" id="productImage" placeholder="https://ejemplo.com/imagen.jpg">
+                <small style="color: #666; display: block; margin-top: 0.3rem;">
+                  Si dejas vacío, se usará una imagen por defecto
+                </small>
+              </div>
+
+              <button type="submit" class="btn-primary">➕ Agregar Producto</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Sección: Gestionar Productos -->
+        <section id="gestionar" class="admin-section">
+          <h2>Gestionar Productos</h2>
+
+          <!-- Filtros -->
+          <div class="filter-bar">
+            <button class="filter-btn active" data-category="todos">
+              Todos (<span id="count-todos">0</span>)
+            </button>
+            <button class="filter-btn" data-category="hombres">
+              Hombres (<span id="count-hombres">0</span>)
+            </button>
+            <button class="filter-btn" data-category="mujeres">
+              Mujeres (<span id="count-mujeres">0</span>)
+            </button>
+            <button class="filter-btn" data-category="ninos">
+              Niños (<span id="count-ninos">0</span>)
+            </button>
+            <button class="filter-btn" data-category="ninas">
+              Niñas (<span id="count-ninas">0</span>)
+            </button>
+          </div>
+
+          <!-- Lista de Productos -->
+          <div class="products-list" id="productsList">
+            <div class="empty-state">
+              <div class="empty-state-icon">📦</div>
+              <p>Cargando productos...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección: Estadísticas -->
+        <section id="estadisticas" class="admin-section">
+          <h2>Estadísticas</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">📦</div>
+              <div class="stat-info">
+                <h3 id="totalProducts">0</h3>
+                <p>Total de Productos</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">👔</div>
+              <div class="stat-info">
+                <h3 id="totalHombres">0</h3>
+                <p>Productos Hombres</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">👗</div>
+              <div class="stat-info">
+                <h3 id="totalMujeres">0</h3>
+                <p>Productos Mujeres</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🧒</div>
+              <div class="stat-info">
+                <h3 id="totalNinos">0</h3>
+                <p>Productos Niños</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">👧</div>
+              <div class="stat-info">
+                <h3 id="totalNinas">0</h3>
+                <p>Productos Niñas</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">💰</div>
+              <div class="stat-info">
+                <h3 id="avgPrice">S/ 0.00</h3>
+                <p>Precio Promedio</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal" id="deleteModal" aria-hidden="true">
+      <div class="modal-content">
+        <h3>⚠️ ¿Eliminar Producto?</h3>
+        <p id="deleteMessage">¿Estás seguro de que deseas eliminar este producto?</p>
+        <div class="modal-actions">
+          <button class="btn-cancel" id="cancelDelete">Cancelar</button>
+          <button class="btn-delete" id="confirmDelete">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="admin-script.js"></script>
+</body>
+</html>
