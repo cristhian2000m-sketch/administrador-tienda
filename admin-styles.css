@@ -718,6 +718,22 @@ body {
 
 /* Móviles grandes */
 @media (max-width: 768px) {
+    /* Sidebar en versión vertical para móviles */
+    .sidebar-nav {
+        flex-direction: column !important;
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+        gap: 0.5rem;
+        padding-bottom: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        text-align: left;
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+
     .admin-header h1 {
         font-size: 1.3rem;
     }
@@ -853,11 +869,21 @@ body {
 
     .sidebar {
         padding: 1rem;
+        overflow: visible;
+    }
+
+    .sidebar-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-bottom: 0;
+        overflow: visible;
     }
 
     .nav-item {
         font-size: 0.9rem;
-        padding: 0.8rem;
+        padding: 0.9rem;
+        width: 100%;
+        text-align: left;
     }
 
     .admin-section h2 {
@@ -1004,5 +1030,5 @@ body {
         gap: 1rem;
     }
 
-    .product
+
 
