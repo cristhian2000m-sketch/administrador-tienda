@@ -678,16 +678,41 @@ body {
     .sidebar {
         position: relative;
         top: 0;
+        padding: 1rem;
     }
 
     .sidebar-nav {
         flex-direction: row;
         overflow-x: auto;
+        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-thumb {
+        background: #667eea;
+        border-radius: 10px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-thumb:hover {
+        background: #5568d3;
     }
 
     .nav-item {
         flex-shrink: 0;
+        min-width: fit-content;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
     }
 }
 
@@ -978,3 +1003,6 @@ body {
         text-align: center;
         gap: 1rem;
     }
+
+    .product
+
