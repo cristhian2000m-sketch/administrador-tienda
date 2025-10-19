@@ -39,6 +39,29 @@ const loginForm = document.getElementById("loginForm");
 const loginError = document.getElementById("loginError");
 const logoutBtn = document.getElementById("logoutBtn");
 
+// ==========================
+// TOGGLE MOSTRAR/OCULTAR CONTRASEÑA
+// ==========================
+const togglePasswordBtn = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
+
+togglePasswordBtn.addEventListener("click", () => {
+  const eyeIcon = togglePasswordBtn.querySelector(".eye-icon");
+  const eyeOffIcon = togglePasswordBtn.querySelector(".eye-off-icon");
+  
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    eyeIcon.style.display = "none";
+    eyeOffIcon.style.display = "block";
+    togglePasswordBtn.setAttribute("aria-label", "Ocultar contraseña");
+  } else {
+    passwordInput.type = "password";
+    eyeIcon.style.display = "block";
+    eyeOffIcon.style.display = "none";
+    togglePasswordBtn.setAttribute("aria-label", "Mostrar contraseña");
+  }
+});
+
 // Verificar si ya está logueado al cargar la página
 function checkAuth() {
   const isLoggedIn = sessionStorage.getItem("isAdminLoggedIn");
@@ -66,7 +89,7 @@ loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
   
   const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
+  const password = passwordInput.value;
 
   if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
     // Login exitoso
@@ -75,6 +98,10 @@ loginForm.addEventListener("submit", (e) => {
     showToast("✅ Bienvenido al panel de administración", "success");
     showAdminPanel();
     loginForm.reset();
+    // Resetear el toggle de contraseña
+    passwordInput.type = "password";
+    togglePasswordBtn.querySelector(".eye-icon").style.display = "block";
+    togglePasswordBtn.querySelector(".eye-off-icon").style.display = "none";
   } else {
     // Login fallido
     loginError.classList.add("show");
@@ -124,6 +151,8 @@ function showToast(message, type = "success") {
     opacity: 0;
     transform: translateX(50px);
     transition: all 0.4s ease;
+    max-width: 300px;
+    word-wrap: break-word;
   `;
   document.body.appendChild(toast);
 
